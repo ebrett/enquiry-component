@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require_relative '../init'
+
+require 'component_host'
+
+ComponentHost.start('enquiry-component') do |host|
+  host.register(EnquiryComponent::Start)
+end
