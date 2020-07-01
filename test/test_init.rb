@@ -12,4 +12,5 @@ require 'pp'
 
 require 'enquiry_component/controls'
 
+module EnquiryComponent; end
 include EnquiryComponent

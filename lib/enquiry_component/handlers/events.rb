@@ -7,12 +7,11 @@ module EnquiryComponent
       include Messaging::Handle
       include Messaging::StreamName
       include Log::Dependency
-      # include Messages::Events once events are implemented
-      # include Messages::Events
+      include Messages::Events
 
       # Note: Delete this file if not handling events
 
-      # TODO Implement event handler blocks
+      # TODO: Implement event handler blocks
       # eg:
       # handle SomethingHappened do |something_happened|
       # end

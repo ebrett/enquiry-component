@@ -4,12 +4,12 @@
 module EnquiryComponent
   class Projection
     include EntityProjection
-    # TODO include Messages::Events once events are implemented"
+    # TODO: include Messages::Events once events are implemented"
     # include Messages::Events
 
     entity_name :enquiry
 
-    # TODO Implement event projection blocks
+    # TODO: Implement event projection blocks
     # eg:
     # apply SomethingHappened do |something_happened|
     #   SetAttributes.(enquiry, something_happened, copy: [

@@ -4,8 +4,8 @@ module EnquiryComponent
       def self.example
         enquiry = EnquiryComponent::Enquiry.build
 
-        enquiry.id = self.id
-        enquiry.something_happened_time = Time::Effective::Raw.example
+        enquiry.id = id
+        enquiry.started_time = Time::Effective::Raw.example
 
         enquiry
       end
@@ -21,6 +21,12 @@ module EnquiryComponent
       module New
         def self.example
           EnquiryComponent::Enquiry.build
+        end
+      end
+
+      module Start
+        def self.example
+          Enquiry.example
         end
       end
 

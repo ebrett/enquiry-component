@@ -1,7 +1,7 @@
 module EnquiryComponent
   module Controls
     module Time
-      def self.example(time=nil)
+      def self.example(time = nil)
         time ||= Raw.example
         ISO8601.example(time)
       end
@@ -13,7 +13,7 @@ module EnquiryComponent
       end
 
       module ISO8601
-        def self.example(time=nil)
+        def self.example(time = nil)
           Clock::Controls::Time::ISO8601.example(time)
         end
 
@@ -23,13 +23,13 @@ module EnquiryComponent
       end
 
       module Processed
-        def self.example(time=nil, offset_milliseconds: nil)
+        def self.example(time = nil, offset_milliseconds: nil)
           offset_milliseconds ||= self.offset_milliseconds
           Clock::Controls::Time::Offset.example(offset_milliseconds, time: time, precision: ISO8601.precision)
         end
 
         module Raw
-          def self.example(time=nil, offset_milliseconds: nil)
+          def self.example(time = nil, offset_milliseconds: nil)
             offset_milliseconds ||= Processed.offset_milliseconds
             Clock::Controls::Time::Offset::Raw.example(offset_milliseconds, time: time, precision: ISO8601.precision)
           end
@@ -41,13 +41,13 @@ module EnquiryComponent
       end
 
       module Effective
-        def self.example(time=nil, offset_milliseconds: nil)
+        def self.example(time = nil, offset_milliseconds: nil)
           offset_milliseconds ||= self.offset_milliseconds
           Clock::Controls::Time::Offset.example(offset_milliseconds, time: time, precision: ISO8601.precision)
         end
 
         module Raw
-          def self.example(time=nil, offset_milliseconds: nil)
+          def self.example(time = nil, offset_milliseconds: nil)
             offset_milliseconds ||= Processed.offset_milliseconds
             Clock::Controls::Time::Offset::Raw.example(offset_milliseconds, time: time, precision: ISO8601.precision)
           end

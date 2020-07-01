@@ -7,10 +7,8 @@ module EnquiryComponent
       include Messaging::Handle
       include Messaging::StreamName
       include Log::Dependency
-      # TODO include Messages::Commands once commands are implemented
-      # include Messages::Commands
-      # TODO include Messages::Events once events are implemented
-      # include Messages::Events
+      include Messages::Events
+      include Messages::Commands
 
       dependency :write, Messaging::Postgres::Write
       dependency :clock, Clock::UTC
@@ -24,26 +22,25 @@ module EnquiryComponent
 
       category :enquiry
 
-      # TODO Implement command handler blocks"
-      # eg:
-      # handle DoSomething do |do_something|
-      #   enquiry_id = do_something.enquiry_id
+      handle Start do |start|
+        enquiry_id = start.enquiry_id
 
-      #   enquiry, version = store.fetch(enquiry_id, include: :version)
+        enquiry, version = store.fetch(enquiry_id, include: :version)
 
-      #   if enquiry.something_happened?
-      #     logger.info(tag: :ignored) { "Command ignored (Command: #{do_something.message_type}, Enquiry ID: #{enquiry_id})" }
-      #     return
-      #   end
+        if enquiry.started?
+          logger.info(tag: :ignored) { "Command ignored #{start.message_type}, Enquiry ID: #{enquiry_id}" }
+          return
+        end
 
-      #   something_happened = SomethingHappened.follow(do_something)
+        time = clock.iso8601
 
-      #   something_happened.processed_time = clock.iso8601
+        started = Started.follow(start)
+        started.processed_time = time
 
-      #   stream_name = stream_name(enquiry_id)
+        stream_name = stream_name(enquiry_id)
 
-      #   write.(something_happened, stream_name, expected_version: version)
-      # end
+        write.(started, stream_name, expected_version: version)
+      end
     end
   end
 end

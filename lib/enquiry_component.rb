@@ -1,8 +1,7 @@
 require 'eventide/postgres'
 
-# TODO Load command and event message files"
-# require 'enquiry_component/messages/commands/...'
-# require 'enquiry_component/messages/events/...'
+require 'enquiry_component/messages/commands/start'
+require 'enquiry_component/messages/events/started'
 
 require 'enquiry_component/enquiry'
 require 'enquiry_component/projection'
